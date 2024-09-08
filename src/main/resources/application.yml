@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/productservice
+    username: postgres
+    password: mirzayev2003
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  servlet:
+    context-path:/product-service-api
+  port: 8083
+
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    tags-sorter: alpha
+    display-request-duration: true
+    operations-sorter: method
+    path: /docs
+    default-models-expand-depth: -1
