@@ -15,7 +15,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   servlet:
-    context-path:/product-service-api
+    context-path: /product-service-api
   port: 8083
 
 
