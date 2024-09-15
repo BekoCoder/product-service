@@ -18,6 +18,8 @@ server:
     context-path: /product-service-api
   port: 8083
 
+application:
+  apiUrl: http://localhost:8082/user-service-api/users/role
 
 springdoc:
   swagger-ui:

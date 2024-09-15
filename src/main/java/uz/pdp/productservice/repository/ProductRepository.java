@@ -5,10 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import uz.pdp.productservice.entity.ProductEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     @Query(value = "select p from ProductEntity p where p.name=:productName")
     Optional<ProductEntity> findByName(String productName);
+
+    @Query(value = "select p from ProductEntity p where p.id<>0 ")
+    List<ProductEntity> findAll();
 }
