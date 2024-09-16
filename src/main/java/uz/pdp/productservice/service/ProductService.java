@@ -15,6 +15,6 @@ public interface ProductService {
 
     ProductDto getProductById(Long id);
 
-    List<ProductDto> getProducts();
+    List<ProductDto> getProducts(HttpServletRequest request);
 
 }

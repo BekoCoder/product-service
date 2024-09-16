@@ -84,16 +84,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getProducts() {
+    public List<ProductDto> getProducts(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(
+                apiUrl,
+                HttpMethod.GET,
+                entity,
+                String.class
+        );
+        String role = response.getBody();
         List<ProductEntity> all = productRepository.findAll();
-        if (all.isEmpty()) {
-            throw new ProductNotFoundException("Bunday mahsulot topilmadi");
+        List<ProductDto> productDtos = new ArrayList<>();
+        if ("SUPER_ADMIN".equals(role)) {
+            for (ProductEntity productEntity : all) {
+                productDtos.add(mapper.map(productEntity, ProductDto.class));
+            }
+            return productDtos;
         }
-        List<ProductDto> product = new ArrayList<>();
-        for (ProductEntity productEntity : all) {
-            product.add(mapper.map(productEntity, ProductDto.class));
-        }
-        return product;
+        throw new CustomException("Bu mahsulot topilmadi");
+
     }
 
     private boolean isExistProduct(String productName) {

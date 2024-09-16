@@ -28,4 +28,3 @@ springdoc:
     display-request-duration: true
     operations-sorter: method
     path: /docs
-    default-models-expand-depth: -1

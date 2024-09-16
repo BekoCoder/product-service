@@ -28,8 +28,8 @@ public class ProductController {
 
     @Operation(summary = "Barcha mahsulotlarni ko'rish")
     @GetMapping("/getAll")
-    public ResponseEntity<List<ProductDto>> getAllProducts() {
-        return ResponseEntity.ok(productService.getProducts());
+    public ResponseEntity<List<ProductDto>> getAllProducts(HttpServletRequest request) {
+        return ResponseEntity.ok(productService.getProducts(request));
     }
 
     @Operation(summary = "Id orqali mahsulotni olish")
